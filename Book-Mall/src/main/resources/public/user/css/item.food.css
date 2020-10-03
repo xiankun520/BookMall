@@ -1,0 +1,62 @@
+@charset "utf-8";
+/*美食餐饮*/
+.store{
+    width:1000px;
+    margin: 24px auto 0;
+    height: auto;
+}
+.store_top{
+    font:24px Microsoft YaHei;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #d9d9d9;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+}
+/*店家*/
+.store_content>div{
+    float: left;
+    width:238px;
+    height:315px;
+    cursor: pointer;
+    margin-right: 16px;
+}
+.store_content{
+    margin-bottom:15px ;
+}
+.store_content:after{content:"";display:block;clear:both;}
+.store_content>div:last-child{
+    margin-right: 0px;
+}
+.store_content>div:hover{
+    box-shadow: 0 0 20px #ccc;
+}
+
+.store_content>div>p{
+    margin-left: 10px;
+}
+.one{
+    margin-top: 18px;
+    font:18px simhei;
+}
+.one>span{
+    font:12px simhei;
+}
+.two{
+    margin-top: 10px;
+}
+.two>span{
+    margin-right: 12px;
+}
+.store_content>div>p.three{
+    margin-top: 3px;
+
+}
+.three>span{
+    margin-right: 18px;
+}
+.three>span>img{
+    position: relative;
+    top:3px;
+    margin-right: 5px;
+}

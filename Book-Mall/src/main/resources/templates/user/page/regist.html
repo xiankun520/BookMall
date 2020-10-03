@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>达内商城学子注册页面</title>
+    <link href="/user/css/header.css" rel="stylesheet"/>
+    <link href="/user/css/footer.css" rel="stylesheet"/>
+    <link href="/user/css/animate.css" rel="stylesheet"/>
+    <link href="/user/css/login.css" rel="stylesheet" />
+</head>
+<body>
+<!--模态框-->
+<div class="modal">
+  	<div class="modal_header">
+    	提示信息
+  	</div>
+  	<div class="modal_content">
+    	恭喜您已成功注册达内学子商城！
+  	</div>
+</div>
+<!-- 页面顶部-->
+<header id="top">
+  <div class="top">
+    <img src="/user/img/header/logo.png" alt=""/>
+    <span>欢迎注册</span>
+    
+    <span style="color:green;margin-top:15px;margin-left:380px" id="clock"></span>
+  </div>
+</header>
+<div class="parent">
+  <div class="container">
+    <div class="panel rt">
+      <form id="fm-register" method="post" th:action="@{/user/register}" action="/user/register">
+        <div class="txt">
+          <p id="newuser">新用户注册
+            <span>
+              <a   th:href="@{/user/toUserLongin}" href="/user/toUserLongin" id="dlogin">直接登录</a>
+            </span>
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="uname">用户名&nbsp;：</label>
+          <input onblur="check_onblur_uname();" onclick="check_onclick_uname();" autocomplete required minlength="6" maxlength="9" type="text" placeholder="请输入用户名" autofocus name="uname" id="uname"/>
+          <span></span>
+        </div>
+        <div class="form-group">
+          <label for="upwd">密&nbsp;&nbsp;&nbsp;码：</label>
+          <input onblur="check_onblur_upwd();" onclick="check_onclick_upwd();" required type="password" minlength="6" maxlength="12" placeholder="请输入密码" name="upwd" autofocus id="upwd"/>
+          <span></span>
+        </div>
+        <div class="form-group">
+          <label for="email">邮&nbsp;&nbsp;&nbsp;箱：</label>
+          <input autocomplete required type="email" placeholder="请输入邮箱地址" name="email" id="email"/>
+          <span></span>
+        </div>
+        <div class="form-group">
+          <label for="phone">手&nbsp;&nbsp;&nbsp;机：</label>
+          <input id="phone" name="phone" placeholder="请输入您的手机号" pattern="^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$" required type="text" />
+          <span></span>
+        </div>
+        <div class="form-group">
+          <label></label>
+          <input type="button" value="提交注册信息" id="bt-register"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 品质保障，私人定制等-->
+<div id="foot_box">
+  <div class="icon1 lf">
+    <img src="/user/img/footer/icon1.png" alt=""/>
+
+    <h3>品质保障</h3>
+  </div>
+  <div class="icon2 lf">
+    <img src="/user/img/footer/icon2.png" alt=""/>
+
+    <h3>私人定制</h3>
+  </div>
+  <div class="icon3 lf">
+    <img src="/user/img/footer/icon3.png" alt=""/>
+
+    <h3>学员特供</h3>
+  </div>
+  <div class="icon4 lf">
+    <img src="/user/img/footer/icon4.png" alt=""/>
+
+    <h3>专属特权</h3>
+  </div>
+</div>
+<!-- 页面底部-->
+<div class="foot_bj">
+  <div id="foot">
+    <div class="lf">
+      <p class="footer1"><img src="/user/img/footer/tedu.png" alt="" class=" footLogo"/></p>
+      <p class="footer2"><img src="/user/img/footer/footerFont.png" alt=""/></p>
+      <!-- 页面底部-备案号 #footer -->
+      <div class="record">
+        2001-2016 版权所有 京ICP证8000853号-56
+      </div>
+    </div>
+    <div class="foot_left lf" >
+      <ul>
+        <li><a href="#"><h3>买家帮助</h3></a></li>
+        <li><a href="#">新手指南</a></li>
+        <li><a href="#">服务保障</a></li>
+        <li><a href="#">常见问题</a></li>
+      </ul>
+      <ul>
+        <li><a href="#"><h3>商家帮助</h3></a></li>
+        <li><a href="#">商家入驻</a></li>
+        <li><a href="#">商家后台</a></li>
+      </ul>
+      <ul>
+        <li><a href="#"><h3>关于我们</h3></a></li>
+        <li><a href="#">关于达内</a></li>
+        <li><a href="#">联系我们</a></li>
+        <li>
+          <img src="/user/img/footer/wechat.png" alt=""/>
+          <img src="/user/img/footer/sinablog.png" alt=""/>
+        </li>
+      </ul>
+    </div>
+    <div class="service">
+      <p>达内商城客户端</p>
+      <img src="/user/img/footer/ios.png" class="lf">
+      <img src="/user/img/footer/android.png" alt="" class="lf"/>
+    </div>
+    <div class="download">
+      <img src="/user/img/footer/erweima.png">
+    </div>
+  </div>
+</div>
+<script src="/user/js/jquery-3.1.1.min.js"></script>
+<script>
+ var t=null;//当前时间
+ function start(){// 自定义函数：启动时间
+		t=setInterval(function (){
+		  var  date=new Date();
+		  var time=date.toLocaleString();
+		  var clock=document.getElementById("clock");
+		  clock.innerHTML="T"+time;
+        },1000)
+ }
+ start();
+ //获取焦点时的提示
+ function check_onclick_uname(){
+   //定位到输入的节点
+   var uname=document.getElementById("uname");
+   //为下一个节点赋值
+   uname.nextElementSibling.innerHTML="请输入6-9位的用户名";
+   uname.nextElementSibling.className="msg-default";
+ }
+ 
+ //失去焦点时的提示
+ function check_onblur_uname(){
+	var uname=document.getElementById("uname");
+	var value=uname.value;
+	if(value.length==0){
+	  uname.nextElementSibling.innerHTML="用户名不能为空";
+	  uname.nextElementSibling.className="msg-error"
+    }else if(value.length<6||value.length>9){
+	  uname.nextElementSibling.innerHTML="请输入6-9位的用户名";
+      uname.nextElementSibling.className="msg-error"
+    }else {
+	  uname.nextElementSibling.innerHTML="用户名正确";
+      uname.nextElementSibling.className="msg-success";
+    }
+
+	$.ajax({
+      type:"post",
+      dataType:"text",
+      url:"/user/checkUname/"+value,
+      success:function (msg){
+        if(msg=="yes"){
+          uname.nextElementSibling.innerHTML="用户名被占用";
+          uname.nextElementSibling.className="msg-error";
+        }
+      }
+    });
+	
+ }
+ //密码框点击时的提示
+ function check_onclick_upwd(){
+	 var upwd=document.getElementById("upwd");
+	 upwd.nextElementSibling.innerHTML="请输入8-12位的密码";
+	 upwd.nextElementSibling.className="msg-default";
+ }
+//密码框失去焦点时的提示
+ function check_onblur_upwd(){
+	 var upwd=document.getElementById("upwd");
+	 var value=upwd.value;
+	 if(value.length==0){
+	   upwd.nextElementSibling.innerHTML="密码不能为空";
+	   upwd.nextElementSibling.className="msg-error";
+     }else  if(value.length<8||value.length>12){
+        upwd.nextElementSibling.innerHTML="请输入8-12的密码";
+        upwd.nextElementSibling.className="msg-error";
+     }else {
+	   upwd.nextElementSibling.innerHTML="密码正确";
+       upwd.nextElementSibling.className="msg-success";
+     }
+ }
+//邮箱框点击(获取焦点)时的提示
+$("#email").focus(function(){
+  this.nextElementSibling.innerHTML="请输入您的邮箱";
+  this.nextElementSibling.className="msg-default";
+});
+//邮箱框失去焦点时的提示
+$("#email").blur(function(){
+  var regex=/^({a-zA-Z}|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+  if(this.validity.valueMissing){
+    this.nextElementSibling.innerHTML="邮箱不能为空";
+    this.nextElementSibling.className="msg-error";
+  }
+  else if(!(regex.test(this.value))){//配合节点的pattern属性使用
+    this.nextElementSibling.innerHTML="邮箱格式不正确";
+    this.nextElementSibling.className="msg-error";
+  }
+
+  else {
+    this.nextElementSibling.innerHTML="邮箱格式正确";
+    this.nextElementSibling.className="msg-success";
+  }
+  var email=document.getElementById("email");
+  $.ajax({
+    type: "post",
+    url: "/user/checkEmail/"+this.value,
+    dataType: "text",
+    success:function (msg){
+      if(msg=="yes"){
+        email.nextElementSibling.innerHTML="邮箱已经被占用";
+        email.nextElementSibling.className="msg-error";
+      }
+    }
+  })
+});
+//手机框点击(获取焦点)时的提示(请输入合法手机号)
+$("#phone").focus(function(){
+  this.nextElementSibling.innerHTML="请输入合法的手机号";
+  this.nextElementSibling.className="msg.default";
+});
+//邮箱框失去焦点时的提示	 
+$("#phone").blur(function(){
+  //    非空验证
+//    格式验证
+  if(this.validity.valueMissing){
+    this.nextElementSibling.innerHTML="手机号不能为空";
+    this.nextElementSibling.className="msg-error";
+  }
+  else if(this.validity.patternMismatch){//配合节点的pattern属性使用
+    this.nextElementSibling.innerHTML="手机号格式不正确";
+    this.nextElementSibling.className="msg-error";
+
+  }
+  else {
+    this.nextElementSibling.innerHTML="手机号正确";
+    this.nextElementSibling.className="msg-success";
+  }
+  var phone=document.getElementById("phone");
+  $.ajax({
+     type:"post",
+  //   如果你的后端返回值类型为String，前端Ajax部分将dataType改成了html或者text还是不行，
+  // 可以尝试将IDE重启，或者将电脑重启，再试一下
+    dataType:"text",
+     url:"/user/checkPhone/"+this.value,
+     success:function (msg){
+       if (msg=="no"){
+         phone.nextElementSibling.innerHTML="手机号被占用";
+         phone.nextElementSibling.className="msg-error";
+       }
+     }, error:function(){
+      // phone.nextElementSibling.innerHTML="手机号被占用";
+      // phone.nextElementSibling.className="msg-error";
+    }
+  })
+});
+//点击提交按钮
+$("#bt-register").click(function(){
+  var length=0;
+  //遍历form-group节点
+  $(".form-group").each(function () {
+            if ($(this).find("span").hasClass("msg-success")) {
+              length++;
+            }
+          }
+  );
+  if(length==4){
+
+    $("#fm-register").submit();
+
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework.boot:spring-boot-starter-test:2.3.5.BUILD-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://E:/apache-maven-tools/org/springframework/boot/spring-boot-starter-test/2.3.5.BUILD-SNAPSHOT/spring-boot-starter-test-2.3.5.BUILD-20201002.074259-36.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://E:/apache-maven-tools/org/springframework/boot/spring-boot-starter-test/2.3.5.BUILD-SNAPSHOT/spring-boot-starter-test-2.3.5.BUILD-20201002.074259-36-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://E:/apache-maven-tools/org/springframework/boot/spring-boot-starter-test/2.3.5.BUILD-SNAPSHOT/spring-boot-starter-test-2.3.5.BUILD-20201002.074259-36-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

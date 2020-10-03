@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookmall.Dao.CartDao">
+
+<insert id="addCart" parameterType="com.example.bookmall.Pojo.Cart">
+    insert  into tb_cart_item(rid,user_id,product,count)
+    values (null ,#{user_id},#{product},#{count});
+</insert>
+
+<!--    查询购物车的总条目-->
+    <select id="findAllCart" parameterType="com.example.bookmall.Pojo.User"
+    resultType="com.example.bookmall.Pojo.BookAndCart"
+    >
+        select book.*,cart.*
+          from tb_cart_item cart
+          inner  join tb_book book
+          on cart.product=book.isbn
+         where cart.user_id=#{phone}
+    </select>
+
+<!--    <resultMap id="allcart" type="com.example.bookmall.Pojo.BookAndCart">-->
+<!--        <id column="isbn" jdbcType="VARCHAR"></id>-->
+<!--        <result column="title" jdbcType="VARCHAR"></result>-->
+<!--        <result column="author" jdbcType="VARCHAR"></result>-->
+<!--        <result column="price" jdbcType="DOUBLE"></result>-->
+<!--        <result column="press" jdbcType="VARCHAR"></result>-->
+<!--        <result column="edition" jdbcType="INTEGER"></result>-->
+<!--        <result column="published" jdbcType="DATE"></result>-->
+<!--        <result column="pages" jdbcType="INTEGER"></result>-->
+<!--        <result column="words" jdbcType="INTEGER"></result>-->
+<!--        <result column="packaging" jdbcType="VARCHAR"></result>-->
+<!--        <result column="format" jdbcType="VARCHAR"></result>-->
+<!--        <result column="form" jdbcType="VARCHAR"></result>-->
+<!--        <collection property=""-->
+<!--    </resultMap>-->
+
+    <update id="updateCarCount" parameterType="Integer" >
+        update tb_cart_item set count=#{num} where rid=#{rid};
+    </update>
+
+    <delete id="deleteCartByRid" parameterType="Integer">
+        delete from tb_cart_item where rid=#{rid};
+    </delete>
+</mapper>

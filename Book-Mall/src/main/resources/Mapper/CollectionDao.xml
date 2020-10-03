@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookmall.Dao.CollectionDao">
+
+<insert id="addCollection" parameterType="com.example.bookmall.Pojo.Collection">
+    insert into tb_collect(rid,user_id,product) values (null,#{user_id},#{product});
+</insert>
+
+    <delete id="deleteCollection" parameterType="com.example.bookmall.Pojo.Collection">
+        delete from tb_collect where user_id=#{user_id} and product=#{product};
+    </delete>
+
+    <select id="findAllCollections" resultType="com.example.bookmall.Pojo.Book">
+       select * from tb_book where  isbn in
+				   (select product from tb_collect where user_id=#{user_id})
+    </select>
+</mapper>

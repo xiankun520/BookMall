@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookmall.Dao.OrderDao">
+
+    <insert id="saveOrder" parameterType="com.example.bookmall.Pojo.Order" >
+        insert into tb_order(user_id,order_id,sta)  values(#{user_id},#{order_id},#{sta});
+    </insert>
+
+
+    <select id="findorderItem"  resultType="com.example.bookmall.Pojo.orderItem">
+           select c.product,c.count,b.price
+                               from tb_cart_item c
+	                           inner join tb_book b
+				  			   on c.product=b.isbn
+				  			   where c.rid in
+				  			   <foreach collection="array" item="rid" open="(" separator="," close=")">
+                                        #{rid}
+                               </foreach>
+
+    </select>
+
+
+    <insert id="saveOrderItem" parameterType="com.example.bookmall.Pojo.orderItem">
+        insert into tb_order_item(rid,product,price,count,order_id)
+         values (null ,#{product},#{price},#{count},#{order_id});
+    </insert>
+
+    <select id="findConfirmOrder" parameterType="String" resultType="com.example.bookmall.Pojo.Confirm_Order">
+        select book.title,book.press,item.count,item.price,item.product,item.order_id
+        from tb_order_item item
+        inner join tb_book book
+        on item.product=book.isbn
+        inner join tb_order
+        on item.order_id=tb_order.order_id
+        where item.order_id=#{order_id}
+    </select>
+
+    <insert id="updateOrder" parameterType="com.example.bookmall.Pojo.Order">
+        update tb_order set sta=#{sta},address_id=#{address_id},
+        payment=#{payment},placed=#{placed},receipt=#{receipt}
+        where user_id=#{user_id} and  order_id=#{order_id};
+    </insert>
+
+    <select id="findCheckOrder" resultType="com.example.bookmall.Pojo.util.checkOrder">
+        select book.title,book.isbn,book.press,item.count,item.price,item.product,item.order_id,
+        tb_order.sta,tb_order.receipt,tb_order.address_id,tb_order.payment
+        from tb_order_item item
+        inner join tb_book book
+        on item.product=book.isbn
+        inner join tb_order
+        on item.order_id=tb_order.order_id
+        where tb_order.user_id=#{user_id};
+    </select>
+
+</mapper>

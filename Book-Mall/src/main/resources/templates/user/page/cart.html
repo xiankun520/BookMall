@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>达内商城购物车</title>
+    <link href="/user/css/header.css" rel="stylesheet" />
+    <link href="/user/css/footer.css" rel="stylesheet" />
+    <link href="/user/css/cart.css" rel="stylesheet" />
+</head>
+<body>
+<!-- 页面顶部-->
+<header id="top">
+    <div id="logo" class="lf">
+        <img class="animated jello" src="/user/img/header/logo.png" alt="logo"/>
+    </div>
+    <div id="top_input" class="lf">
+        <input id="input" type="text" placeholder="请输入您要搜索的内容"/>
+
+        <a href="" class="rt"><img id="search" src="/user/img/header/search.png" alt="搜索"/></a>
+    </div>
+    <div class="rt">
+        <ul class="lf">
+            <li><a th:href="@{/book/findall}" href="/user/toIndex" >首页</a><b>|</b></li>
+            <li><a th:href="@{/user/showCollection}" href="/user/toCollect" >收藏</a><b>|</b></li>
+            <li><a  th:href="@{/user/chechOrder}" href="/user/toOrder" >订单</a><b>|</b></li>
+            <li><a th:href="@{/user/findAllCart}" href="/user/toCar" >购物车</a><b>|</b></li>
+            <li><a th:href="@{/user/toPasswordChange}" href="/user/toPasswordChange">设置</a><b>|</b></li>
+            <li><a th:href="@{/user/loginOut}" href="login.html">退出</a><b>|</b></li>
+            <li><a th:href="@{/user/toHelp}" href="/user/toHelp">帮助</a></li>
+        </ul>
+    </div>
+</header>
+<!-- nav主导航-->
+
+<div class="modal" style="display:none">
+    <div class="modal_dialog">
+        <div class="modal_header">
+            删除提醒
+        </div>
+        <div class="modal_information">
+            <img src="/user/img/model/model_img2.png" alt=""/>
+            <span>确定删除您的这个宝贝吗？</span>
+        </div>
+        <div class="yes"><span>删除</span></div>
+        <div class="no"><span>不删除</span></div>
+    </div>
+</div>
+<div class="modalNo" style="display:none">
+    <div class="modal_dialog">
+        <div class="modal_header">
+            删除提示
+            <img src="/user/img/model/model_img1.png" alt="" class="rt close"/>
+        </div>
+        <div class="modal_information">
+            <img src="/user/img/model/model_img2.png" alt=""/>
+            <span>请选择商品</span>
+        </div>
+    </div>
+</div>
+
+<div class="big">
+    <form  name="" action="" method="post">
+    <section id="section" >
+        <div id="title">
+            <b>购物车</b>
+            <p>
+                已选<span class="total color">0</span>件商品<span class="interval"></span>合计(不含运费):<span class="totalPrices color susum">0.00</span><span class="unit color">元</span>
+            </p>
+        </div>
+        <div id="box" >
+            <div id="content_box">
+                <div class="imfor_top">
+                    <div class="check_top">
+                        <div class="all">
+                            <span class="normal">
+                                <img src="/user/img/cart/product_normal.png" alt=""/>
+                            </span>  <input type="hidden" name="" value="">全选
+                        </div>
+                    </div>
+                    <div class="pudc_top">商品</div>
+                    <div class="pices_top">单价(元)</div>
+                    <div class="num_top">数量</div>
+                    <div class="totle_top">金额</div>
+                    <div class="del_top">操作</div>
+                </div>
+				
+                <div class="imfor" th:each="cart:${allcart}">
+                    <div class="check">
+                        <div class="Each">
+                            <span class="normal">
+                                <img  src="/user/img/cart/product_normal.png" alt=""/>
+                            </span>
+                            <input type="hidden" name="" value="">
+                        </div>
+                    </div>
+                    <div class="pudc">
+                        <div class="pudc_information" th:id="${cart.getRid()}" id="1">
+                            <img  th:src="@{/user/img/goods/}+${cart.getIsbn()}+@{/detail1.jpg} " src="/user/img/goods/9787115130228/detail1.jpg" class="lf"/>
+                            <input type="hidden" name="" value="">
+                        <span th:text="${cart.getTitle()}"  class="des lf">
+                         C Primer Plus
+                              <input type="hidden" name="" value="">
+                        </span>
+                            <p class="col lf"><span >作者：</span><span class="color_des" th:text="${cart.getAuthor()}" >[美] 普拉塔（Prata S.） 著；云巅工作室 编  <input type="hidden" name="" value=""></span></p>
+                        </div>
+                    </div>
+<!--                    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+<!--                    //单价-->
+                    <div class="pices">
+                        <p class="pices_des"></p>
+                        <p class="pices_information"><b>￥</b><span th:text="${cart.getPrice()}"  >49.8<input type="hidden" name="" value=""></span></p>
+                    </div>
+
+<!--                    //加号-->
+                    <div class="num"><span class="reduc">&nbsp;-&nbsp;</span><input type="text"  th:value="${cart.getCount()}" value="9" ><span class="add">&nbsp;+&nbsp;</span></div>
+                    <div class="totle">
+                        <span>￥</span>
+                        <span class="totle_information" th:text="${#numbers.formatDecimal(cart.getCount()*cart.getPrice(),0,2)}" >49.8</span>
+                    </div>
+                    <div class="del">
+                        <a href="javascript:;" class="del_d">删除</a>
+                    </div>
+                </div>
+             
+                
+                
+            </div>
+            <div class="foot">
+                <div class="foot_check">
+                    <div class="all">
+                        <span class="normal">
+                                <img src="/user/img/cart/product_normal.png" alt=""/>
+                            </span>  <input type="hidden" name="" value="">全选
+                    </div>
+                </div>
+                <div class="foot_cash" id="go-buy">提交订单</div>
+                <div class="foot_tol"><span>合计(不含运费):</span><span  class="foot_pices susumOne">0.00</span><span class='foot_des'>元</span></div>
+                <div class="foot_selected">
+                    已选<span class="totalOne color">0</span>件商品
+                </div>
+            </div>
+        </div>
+    </section>
+    </form>
+    <div class="none" style="display: none">
+        <p class="none_title">购物车</p>
+        <div class="none_top"></div>
+        <div class="none_content">
+            <img src="/user/img/30.png" alt="" class="lf"/>
+            <p class="lf">您的购物车竟然还是空哒( ⊙ o ⊙ )</p>
+            <span class="lf">赶快去下单吧！</span>
+            <a href="#" class="lf">去购物>></a>
+        </div>
+
+    </div>
+</div>
+<!-- 品质保障，私人定制等-->
+<div id="foot_box">
+    <div class="icon1 lf">
+        <img src="/user/img/footer/icon1.png" alt=""/>
+
+        <h3>品质保障</h3>
+    </div>
+    <div class="icon2 lf">
+        <img src="/user/img/footer/icon2.png" alt=""/>
+
+        <h3>私人定制</h3>
+    </div>
+    <div class="icon3 lf">
+        <img src="/user/img/footer/icon3.png" alt=""/>
+
+        <h3>学员特供</h3>
+    </div>
+    <div class="icon4 lf">
+        <img src="/user/img/footer/icon4.png" alt=""/>
+
+        <h3>专属特权</h3>
+    </div>
+</div>
+<!-- 页面底部-->
+<div class="foot_bj">
+    <div id="foot">
+        <div class="lf">
+            <p class="footer1"><img src="/user/img/footer/tedu.png" alt="" class=" footLogo"/></p>
+            <p class="footer2"><img src="/user/img/footer/footerFont.png" alt=""/></p>
+            <!-- 页面底部-备案号 #footer -->
+            <div class="record">
+                2001-2016 版权所有 京ICP证8000853号-56
+            </div>
+        </div>
+        <div class="foot_left lf" >
+            <ul>
+                <li><a href="#"><h3>买家帮助</h3></a></li>
+                <li><a href="#">新手指南</a></li>
+                <li><a href="#">服务保障</a></li>
+                <li><a href="#">常见问题</a></li>
+            </ul>
+            <ul>
+                <li><a href="#"><h3>商家帮助</h3></a></li>
+                <li><a href="#">商家入驻</a></li>
+                <li><a href="#">商家后台</a></li>
+            </ul>
+            <ul>
+                <li><a href="#"><h3>关于我们</h3></a></li>
+                <li><a href="#">关于达内</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li>
+                    <img src="/user/img/footer/wechat.png" alt=""/>
+                    <img src="/user/img/footer/sinablog.png" alt=""/>
+                </li>
+            </ul>
+        </div>
+        <div class="service">
+            <p>达内商城客户端</p>
+            <img src="/user/img/footer/ios.png" class="lf">
+            <img src="/user/img/footer/android.png" alt="" class="lf"/>
+        </div>
+        <div class="download">
+            <img src="/user/img/footer/erweima.png">
+        </div>
+    </div>
+</div>
+<script src="/user/js/jquery-3.1.1.min.js"></script>
+<script src="/user/js/cart.js"></script>
+<script src="/user/jsc/user/js/index.js"></script>
+<script>
+    <!-- 显示空购物车页面-->
+    $(function(){
+        if(!$(".imfor")) {
+            $('#section').hide();
+            $('.none').show();
+        }
+      //删除当前行
+    	$('.del_d').click(function() {
+    	    //.partent 父节点 .pudc
+            //.siblings 兄弟节点
+            //children  孩子节点 .pudc_information
+    			var id=$(this).parent().siblings('.pudc').children('.pudc_information').attr('id');
+    			console.log(id);
+    			$('.modal').fadeIn();
+    			$('.no').click(function(){
+    				$('.modal').fadeOut();
+    			});
+    			$('.yes').click(function(){
+    				var url ='/user/deleteCartByRid?rid='+id;     //删除购物车
+    				 window.location.href=url;
+    			})
+    	});
+    })
+    
+    function adddel(){
+	//加宝贝数量
+	$(".add").each(function() {
+		$(this).click(function() {
+			var $multi = 0;
+			//.prev同级的上一个节点的值 加号前一个节点的值
+			var vall = $(this).prev().val();
+			vall++;
+			$(this).prev().val(vall);//增加后的数量
+			$multi = parseInt(vall).toFixed(2) * parseFloat($(this).parent().prev().children().eq(1).children().eq(1).text());//获取单价
+			$(this).parent().next().children().eq(1).text($multi.toFixed(2));
+			amountadd();
+			
+			var id=$(this).parent().siblings('.pudc').children('.pudc_information').attr('id');
+			var num=$(this).prev().val();
+            var params = {
+                rid:id,
+                num:num
+            };
+			$.ajax({
+				type: "get",
+				url: "/user/updateCarCount", //数据库更新
+				data: params,
+                headers:{
+                    'Content-Type':'application/json;charset=utf-8'
+                },
+				success: function(data){
+				}
+			});
+		})
+	})
+	//减宝贝数量
+	$(".reduc").each(function() {
+		$(this).click(function() {
+			var $multi1 = 0;
+			var vall1 = $(this).next().val();
+			vall1--;
+			if(vall1 <= 0) {
+				vall1 = 1;
+			}
+			$(this).next().val(vall1);//减少后的数量填充			
+						
+			$multi1 = parseInt(vall1).toFixed(2) * parseFloat($(this).parent().prev().children().eq(1).children().eq(1).text());
+			$(this).parent().next().children().eq(1).text($multi1.toFixed(2));
+			amountadd();
+			
+			var id=$(this).parent().siblings('.pudc').children('.pudc_information').attr('id');
+			var num=vall1;
+			$.ajax({
+				type: "GET",
+				url: "/user/updateCarCount",  //更新数据库的参数
+				data: {rid:id,num:num},
+				success: function(data){					
+				}
+			});
+		 })
+	 })
+ }
+  //单独
+    function amountadd(){
+           var amo=0;
+           $('.Each>span').each(function(){
+            if($(this).hasClass('true')){
+            	amo+=parseFloat($(this).parent().parent().siblings('.totle').children('.totle_information').text());
+            }
+           })
+           $('.susum').text(amo.toFixed(2));
+           $('.susumOne').text(amo.toFixed(2));    	
+    }
+    //合计
+    function totl() {
+        var sum = 0.00;
+        var amount=0;
+        $(".totle_information").each(function() {
+        	sum += parseFloat($(this).text());		
+        	amount++;		
+        })
+        $('.total').text(amount);
+        $('.totalOne').text(amount);
+        $(".susum").text(sum.toFixed(2));
+        $(".susumOne").text(sum.toFixed(2));	
+    }   
+  //去结算
+    var str=[];
+    var totalPrice=0;
+    $('.foot_cash').click(function(){
+    	$('.Each>span').each(function(){
+    		if($(this).hasClass('true')){
+    			var id=$(this).parent().parent().next().children('.pudc_information').attr('id');
+    			str.push(id);
+    		}
+    	});
+
+    	//str是一个字符串数组，里面存储的是没一个cart_item的rid
+    	if(str.length>0){
+    		 var url = '/user/cartToOrder?rids='+str;
+    		 window.location.href = url;
+    	}
+    })
+</script>
+</body>
+</html>

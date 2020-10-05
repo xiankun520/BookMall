@@ -89,7 +89,7 @@
                    <br/>
                    <span class="pro_price">￥<span th:text="${confirm.getPrice()}" class="ppp_price">29.90</span></span>
                </li>
-               <li class="p_count" th:text="${confirm.getCount()}">X<span>1</span></li>
+               <li class="p_count">X<span th:text="${confirm.getCount()}">1</span></li>
                <li class="p_tPrice">￥<span th:text="${#numbers.formatDecimal(confirm.getCount()*confirm.getPrice(),0,2)}"></span></li>
            </ul>
         </div>
@@ -177,14 +177,15 @@
         $(".item_detail").each(function() {
             html+=1;
             var p=parseFloat($(this).children('.p_price').children('.pro_price').children('.ppp_price').html());
-            //console.log(p);
+            console.log(p);
             var sl=parseFloat($(this).children('.p_count').children('span').html());
+            console.log("sl"+sl);
             var xj=parseFloat(p*sl).toFixed(2);
-            //console.log("xiaoji"+xj);
+            console.log("xiaoji"+xj);
             //$(this).children('.p_tPrice').children('span').html(xj);
             total+=xj-0;
         })
-        //console.log("zongji"+total);
+        console.log("zongji"+total);
         $("#count").html(html)-0;
         $('.zj').html(total.toFixed(2))-0;
         var input_zj=parseFloat($('.zj').html()).toFixed(2);       

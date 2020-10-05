@@ -48,8 +48,14 @@ public class OrderDaoServiceImpl implements OrderDaoService {
     }
 
     @Override
-    public ArrayList<checkOrder> findCheckOrder(String order_id) {
-        ArrayList<checkOrder> checkOrder = orderDao.findCheckOrder(order_id);
+    public ArrayList<checkOrder> findCheckOrderCount(String order_id) {
+        ArrayList<checkOrder> checkOrder = orderDao.findCheckOrderCount(order_id);
         return checkOrder;
+    }
+
+    @Override
+    public ArrayList<checkOrder> findCheckOrder(String user_id, int start, int length) {
+        ArrayList<checkOrder> checkOrder = orderDao.findCheckOrder(user_id, start, length);
+        return  checkOrder;
     }
 }

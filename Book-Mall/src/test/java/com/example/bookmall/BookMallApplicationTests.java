@@ -45,7 +45,15 @@ class BookMallApplicationTests {
 
     @Test
     void checkOrder(){
-        ArrayList<checkOrder> checkOrder = orderDaoService.findCheckOrder("12345678900");
+        ArrayList<checkOrder> checkOrder = orderDaoService.findCheckOrderCount("12345678900");
+        for (int i = 0; i <checkOrder.size() ; i++) {
+            System.out.println(checkOrder.get(i).toString());
+        }
+    }
+
+    @Test
+    void findorder(){
+        ArrayList<checkOrder> checkOrder = orderDaoService.findCheckOrder("12345678900", 0, 10);
         for (int i = 0; i <checkOrder.size() ; i++) {
             System.out.println(checkOrder.get(i).toString());
         }
@@ -67,7 +75,6 @@ class BookMallApplicationTests {
         redisTemplate.opsForValue().set("name","xiankun");
         Object name = redisTemplate.opsForValue().get("name");
         System.out.println(name);
-
     }
 
 }

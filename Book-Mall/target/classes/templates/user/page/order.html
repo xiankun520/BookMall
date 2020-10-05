@@ -139,6 +139,7 @@
         <!-- 右边栏(没有订单时)结束 -->
     </div>
 
+
 <!-- 品质保障，私人定制等-->
 <div id="foot_box">
     <div class="icon1 lf">
@@ -212,22 +213,22 @@
 <script src="/user/js/order.js"></script>
 <script type="text/javascript">
 //分页部分
+// $(".tcdPageCode").createPage({
+//     pageCount:6,
+//     current:1,
+//     backFn:function(p){
+//
+//     }
+// });
+
 $(".tcdPageCode").createPage({
-    pageCount:6,
-    current:1,
-    backFn:function(p){
-    	
+    pageCount:[[${pageCount}]] ,
+    current: [[${current}]],
+    backFn:function(current){
+        var start = (current-1)*[[${length}]];
+        window.location.href='/user/chechOrder?current='+current+'&start='+start+'&length='+[[${length}]];
     }
 });
-/*
-$(".tcdPageCode").createPage({
-    pageCount: ${requestScope.pageCount },
-    current: ${requestScope.current },
-    backFn:function(pageIndex){
-        var start = (pageIndex-1)*${requestScope.length };
-        window.location.href='../servlet/show-order?pageIndex='+pageIndex+'&start='+start+'&length='+${requestScope.length };
-    }
-});
-*/
+
 </script>
 </html>

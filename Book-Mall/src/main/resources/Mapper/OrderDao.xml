@@ -42,6 +42,17 @@
         where user_id=#{user_id} and  order_id=#{order_id};
     </insert>
 
+    <select id="findCheckOrderCount" resultType="com.example.bookmall.Pojo.util.checkOrder">
+        select book.title,book.isbn,book.press,item.count,item.price,item.product,item.order_id,
+        tb_order.sta,tb_order.receipt,tb_order.address_id,tb_order.payment
+        from tb_order_item item
+        inner join tb_book book
+        on item.product=book.isbn
+        inner join tb_order
+        on tb_order.order_id=item.order_id
+        where tb_order.user_id=#{user_id};
+    </select>
+
     <select id="findCheckOrder" resultType="com.example.bookmall.Pojo.util.checkOrder">
         select book.title,book.isbn,book.press,item.count,item.price,item.product,item.order_id,
         tb_order.sta,tb_order.receipt,tb_order.address_id,tb_order.payment
@@ -49,8 +60,11 @@
         inner join tb_book book
         on item.product=book.isbn
         inner join tb_order
-        on item.order_id=tb_order.order_id
-        where tb_order.user_id=#{user_id};
+        on tb_order.order_id=item.order_id
+        where tb_order.user_id=#{user_id}
+        limit #{start},#{length}
+        ;
+
     </select>
 
 </mapper>

@@ -113,8 +113,30 @@ public class OrderControllor {
     @GetMapping("/user/chechOrder")
     public String ChechOrder(HttpServletRequest req,Model model){
         User user = (User) req.getSession().getAttribute("user");
-        ArrayList<checkOrder> checkOrder = orderDaoService.findCheckOrder(user.getPhone());
-        model.addAttribute("checkOrder",checkOrder);
+        ArrayList<checkOrder> checkOrder = orderDaoService.findCheckOrderCount(user.getPhone());
+        int count=checkOrder.size();//总数
+        //每一页显示的行数，默认是10行
+        String lengthStr = req.getParameter("request")==null?"5":req.getParameter("request");
+        int length = Integer.parseInt(lengthStr);
+        //从第几行记录开始显示(也就是每一页的第一行记录是总的记录的第几行)，默认是第一行
+        String startStr = req.getParameter("start")==null?"0": req.getParameter("start");
+        int start = Integer.parseInt(startStr);
+        //第几页，默认是第一页
+        String currentStr = req.getParameter("current")==null?"1":req.getParameter("current");
+        int current = Integer.parseInt(currentStr);
+        int pageCount=0;
+        if(count%length==0){
+            pageCount = count/length+1;
+        }else {
+             pageCount = count/length+1;
+        }
+        ArrayList<checkOrder> checkOrder1 = orderDaoService.findCheckOrder(user.getPhone(), start, length);
+
+        model.addAttribute("length",length);
+        model.addAttribute("start",start);
+        model.addAttribute("current",current);
+        model.addAttribute("pageCount",pageCount);
+        model.addAttribute("checkOrder",checkOrder1);
         return "user/page/order";
     }
 }

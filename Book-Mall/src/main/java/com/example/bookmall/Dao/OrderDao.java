@@ -36,8 +36,11 @@ public interface OrderDao {
 
     int updateOrder(Order order);
 
-    ArrayList<checkOrder>  findCheckOrder(@Param("user_id") String user_id);
+    ArrayList<checkOrder>  findCheckOrderCount(@Param("user_id") String user_id);
 
+    ArrayList<checkOrder> findCheckOrder(@Param("user_id") String user_id,
+                                         @Param("start") int start,
+                                         @Param("length") int length);
 
 
 

@@ -57,7 +57,7 @@ public class PayMentControllor {
         log.info("address_id="+payment.getRid());
         Order order=new Order();
         order.setAddress_id(payment.getRid());
-        order.setPayment(88888);
+        order.setPayment(payment.getPayment());
         order.setUser_id(user.getPhone());
         order.setOrder_id(payment.getOrder_id());
         order.setPlaced(new Date());

@@ -6,7 +6,6 @@ import com.example.bookmall.Pojo.Order;
 import com.example.bookmall.Pojo.orderItem;
 import com.example.bookmall.Pojo.util.checkOrder;
 import com.example.bookmall.Service.OrderDaoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -58,4 +57,5 @@ public class OrderDaoServiceImpl implements OrderDaoService {
         ArrayList<checkOrder> checkOrder = orderDao.findCheckOrder(user_id, start, length);
         return  checkOrder;
     }
+
 }

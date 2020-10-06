@@ -53,7 +53,8 @@ class BookMallApplicationTests {
 
     @Test
     void findorder(){
-        ArrayList<checkOrder> checkOrder = orderDaoService.findCheckOrder("12345678900", 0, 10);
+        ArrayList<checkOrder> checkOrder = orderDaoService.findCheckOrder("12345678900", 0, 5);
+//        System.out.println(checkOrder.get(1).getOrder_id());
         for (int i = 0; i <checkOrder.size() ; i++) {
             System.out.println(checkOrder.get(i).toString());
         }
@@ -61,7 +62,7 @@ class BookMallApplicationTests {
     
     @Test
     void confirmOrder(){
-        String order_id="900200929143603";
+        String order_id="900201005114138";
         ArrayList<Confirm_Order> confirmOrder = orderDaoService.findConfirmOrder(order_id);
         for (int i = 0; i < confirmOrder.size(); i++) {
             System.out.println(confirmOrder.get(i).toString());

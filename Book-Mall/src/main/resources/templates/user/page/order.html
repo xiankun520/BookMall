@@ -67,11 +67,13 @@
                 </tr>
             </table>
             <!-- 订单列表项 -->
+            <div th:with="order='0'">
             <div th:each="Order:${checkOrder}">
-            <div id="orderItem" >
-              <p class="orderItem_title">
+            <div id="orderItem"  th:if="${order!=Order.getOrderId()}" >
+
+              <p class="orderItem_title" th:with="order=${Order.getOrderId() }">
                  <span id="order_id">
-                     &nbsp;&nbsp;订单编号:<a href="#">12345678910</a>
+                     &nbsp;&nbsp;订单编号:<a href="#" th:text="${Order.getOrderId()}">12345678910</a>
                  </span>
                   &nbsp;&nbsp;<b th:text="${#dates.format(Order.getReceipt(),'yyyy-MM-dd HH:mm')}">成交时间：2016-01-04 18:00&nbsp;&nbsp;</b>
                  <span>
@@ -123,6 +125,7 @@
 			<!--分页器-->
 
         </div>
+            </div>
         </div>
         <div class="tcdPageCode"></div>
         <!-- 右边栏(没有订单时) -->

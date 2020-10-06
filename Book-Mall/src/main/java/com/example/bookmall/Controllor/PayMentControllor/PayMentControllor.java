@@ -53,13 +53,13 @@ public class PayMentControllor {
 
         model.addAttribute("payment",payment);
         User user = (User) req.getSession().getAttribute("user");
-        log.info("#######"+payment.getOrder_id());
+        log.info("#######"+payment.getOrderId());
         log.info("address_id="+payment.getRid());
         Order order=new Order();
         order.setAddress_id(payment.getRid());
         order.setPayment(payment.getPayment());
         order.setUser_id(user.getPhone());
-        order.setOrder_id(payment.getOrder_id());
+        order.setOrder_id(payment.getOrderId());
         order.setPlaced(new Date());
         order.setReceipt(new Date());
         order.setSta("待发货");

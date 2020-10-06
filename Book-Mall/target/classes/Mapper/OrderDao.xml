@@ -54,17 +54,18 @@
     </select>
 
     <select id="findCheckOrder" resultType="com.example.bookmall.Pojo.util.checkOrder">
-        select book.title,book.isbn,book.press,item.count,item.price,item.product,item.order_id,
-        tb_order.sta,tb_order.receipt,tb_order.address_id,tb_order.payment
+        select book.title,book.isbn,book.press,item.count,item.price,order1.order_id,
+        order1.sta,order1.receipt,order1.address_id,order1.payment
         from tb_order_item item
         inner join tb_book book
         on item.product=book.isbn
-        inner join tb_order
-        on tb_order.order_id=item.order_id
-        where tb_order.user_id=#{user_id}
+        inner join tb_order order1
+        on order1.order_id=item.order_id
+        where order1.user_id=#{user_id}
         limit #{start},#{length}
         ;
 
     </select>
+
 
 </mapper>
